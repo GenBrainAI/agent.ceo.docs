@@ -25,11 +25,38 @@ nav:
     - AI Agents: concepts/agents.md
     - Organizations: concepts/organizations.md
     - Roles: concepts/roles.md
+    - Agent Roles Guide: concepts/agent-roles.md
     - Messaging: concepts/messaging.md
     - Task Management: concepts/tasks.md
     - Agent Lifecycle: concepts/lifecycle.md
     - Knowledge Base: concepts/knowledge-base.md
     - Cyborgenic Organizations: concepts/cyborgenic-orgs.md
+    - Cyborgenic Vision (Deep Dive): concepts/cyborgenic-organizations.md
+    - Human-AI Collaboration: concepts/human-ai-collaboration.md
+    - Continuous Operation: concepts/continuous-operation.md
+  - UI Guide:
+    - Dashboard Overview: ui/dashboard-overview.md
+    - Terminal: ui/terminal.md
+    - Task Board: ui/task-board.md
+    - Agent Management: ui/agent-management.md
+    - Credentials: ui/credentials.md
+    - Meetings: ui/meetings.md
+    - Billing: ui/billing-ui.md
+    - Settings: ui/settings.md
+    - Activity Feed: ui/activity-feed.md
+    - Extensions: ui/extensions.md
+  - MCP:
+    - Overview: mcp/agent-ceo-mcp-overview.md
+    - Tool Catalog: mcp/mcp-tool-catalog.md
+    - For Developers: mcp/mcp-for-developers.md
+    - Integration Guide: mcp/mcp-integration-guide.md
+    - Security: mcp/mcp-security.md
+  - GenAI Capabilities:
+    - GenAI-First Architecture: genai/genai-first-architecture.md
+    - LLM Agent Patterns: genai/llm-agent-patterns.md
+    - Context Management: genai/context-management.md
+    - Sub-Agent Parallelization: genai/sub-agent-parallelization.md
+    - Autonomous Operations: genai/autonomous-operations.md
   - Platform:
     - Architecture: platform/architecture.md
     - Gateway API: platform/gateway-api.md
