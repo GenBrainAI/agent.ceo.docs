@@ -1,39 +1,71 @@
-site_name: agent.ceo Documentation
+site_name: AGENT_CEO // DOCUMENTATION
 site_url: https://docs.agent.ceo
 site_description: Complete platform documentation for agent.ceo — the cyborgenic AI agent orchestration platform by GenBrain AI.
 repo_url: https://github.com/GenBrainAI/agent.ceo.docs
 
 theme:
   name: material
+  custom_dir: overrides
   palette:
-    primary: deep purple
-    accent: amber
+    scheme: slate
+  font: false
   features:
     - navigation.sections
     - navigation.expand
+    - navigation.indexes
+    - navigation.top
     - search.highlight
+    - search.suggest
     - content.code.copy
+    - content.code.annotate
+    - toc.follow
+  icon:
+    repo: fontawesome/brands/github
 
 nav:
-  - Getting Started:
-    - Overview: getting-started/index.md
-    - Deploy Your First Agent: getting-started/first-agent.md
-    - Set Up an Agent Team: getting-started/agent-team.md
-    - Dashboard Guide: getting-started/dashboard.md
-    - Billing & Pricing: getting-started/billing.md
-  - Concepts:
-    - AI Agents: concepts/agents.md
-    - Organizations: concepts/organizations.md
-    - Roles: concepts/roles.md
-    - Agent Roles Guide: concepts/agent-roles.md
-    - Messaging: concepts/messaging.md
-    - Task Management: concepts/tasks.md
-    - Agent Lifecycle: concepts/lifecycle.md
-    - Knowledge Base: concepts/knowledge-base.md
+  - What is agent.ceo:
+    - Introduction: getting-started/index.md
     - Cyborgenic Organizations: concepts/cyborgenic-orgs.md
     - Cyborgenic Vision (Deep Dive): concepts/cyborgenic-organizations.md
     - Human-AI Collaboration: concepts/human-ai-collaboration.md
     - Continuous Operation: concepts/continuous-operation.md
+    - Architecture: platform/architecture.md
+  - Quick Start:
+    - Deploy Your First Agent: getting-started/first-agent.md
+    - Set Up an Agent Team: getting-started/agent-team.md
+    - Dashboard Guide: getting-started/dashboard.md
+    - Billing & Pricing: getting-started/billing.md
+  - Core Concepts:
+    - AI Agents: concepts/agents.md
+    - Organizations: concepts/organizations.md
+    - Roles: concepts/roles.md
+    - Agent Roles Guide: concepts/agent-roles.md
+    - Agent Lifecycle: concepts/lifecycle.md
+    - Task Management: concepts/tasks.md
+    - Messaging (NATS): concepts/messaging.md
+    - Knowledge Graph: concepts/knowledge-base.md
+    - GenAI-First Architecture: genai/genai-first-architecture.md
+    - LLM Agent Patterns: genai/llm-agent-patterns.md
+    - Context Management: genai/context-management.md
+    - Sub-Agent Parallelization: genai/sub-agent-parallelization.md
+    - Autonomous Operations: genai/autonomous-operations.md
+  - User Guides:
+    - Creating Agents: agents/creating-agents.md
+    - Agent Configuration: agents/agent-config.md
+    - Templates & Cloning: agents/templates.md
+    - Agent Tools: agents/tools.md
+    - Agent Memory: agents/memory.md
+    - Hooks: agents/hooks.md
+    - Scaling: agents/scaling.md
+    - Monitoring: agents/monitoring.md
+    - Task Management: features/task-management.md
+    - Meetings: features/meetings.md
+    - Knowledge Base: features/knowledge-base.md
+    - Cloud Discovery: features/cloud-discovery.md
+    - CI/CD Analysis: features/cicd-analysis.md
+    - Security Reviews: features/security-reviews.md
+    - Skill Generation: features/skill-generation.md
+    - Two-Factor Auth: features/2fa-mfa.md
   - UI Guide:
     - Dashboard Overview: ui/dashboard-overview.md
     - Terminal: ui/terminal.md
@@ -45,52 +77,39 @@ nav:
     - Settings: ui/settings.md
     - Activity Feed: ui/activity-feed.md
     - Extensions: ui/extensions.md
+  - API Reference:
+    - Authentication: platform/authentication.md
+    - REST API: api-reference/rest-api.md
+    - Gateway API: platform/gateway-api.md
+    - WebSocket API: api-reference/websocket-api.md
+    - NATS API: api-reference/nats-api.md
+    - MCP Tool Catalog: api-reference/mcp-catalog.md
+    - MCP Tools Overview: platform/mcp-tools.md
+    - Event Types: api-reference/event-types.md
+    - Error Codes: api-reference/error-codes.md
+    - Webhooks: platform/webhooks.md
+    - NATS Protocol: platform/nats-protocol.md
+    - Rate Limits: platform/rate-limits.md
+    - Billing API: platform/billing-api.md
   - MCP:
     - Overview: mcp/agent-ceo-mcp-overview.md
     - Tool Catalog: mcp/mcp-tool-catalog.md
     - For Developers: mcp/mcp-for-developers.md
     - Integration Guide: mcp/mcp-integration-guide.md
     - Security: mcp/mcp-security.md
-  - GenAI Capabilities:
-    - GenAI-First Architecture: genai/genai-first-architecture.md
-    - LLM Agent Patterns: genai/llm-agent-patterns.md
-    - Context Management: genai/context-management.md
-    - Sub-Agent Parallelization: genai/sub-agent-parallelization.md
-    - Autonomous Operations: genai/autonomous-operations.md
-  - Platform:
-    - Architecture: platform/architecture.md
-    - Gateway API: platform/gateway-api.md
-    - Authentication: platform/authentication.md
-    - Billing API: platform/billing-api.md
-    - Webhooks: platform/webhooks.md
-    - MCP Tools: platform/mcp-tools.md
-    - NATS Protocol: platform/nats-protocol.md
-    - Rate Limits: platform/rate-limits.md
-  - Agents:
-    - Creating Agents: agents/creating-agents.md
-    - Agent Configuration: agents/agent-config.md
-    - Templates: agents/templates.md
-    - Tools: agents/tools.md
-    - Memory: agents/memory.md
-    - Hooks: agents/hooks.md
-    - Scaling: agents/scaling.md
-    - Monitoring: agents/monitoring.md
-  - Features:
-    - Knowledge Base: features/knowledge-base.md
-    - Cloud Discovery: features/cloud-discovery.md
-    - CI/CD Analysis: features/cicd-analysis.md
-    - Security Reviews: features/security-reviews.md
-    - Task Management: features/task-management.md
-    - Meetings: features/meetings.md
-    - Skill Generation: features/skill-generation.md
-    - Two-Factor Auth: features/2fa-mfa.md
-  - Deployment:
-    - Kubernetes: deployment/kubernetes.md
-    - Docker: deployment/docker.md
+  - Operations:
+    - Security Overview: security/overview.md
+    - RBAC: security/rbac.md
+    - Audit Logging: security/audit-logging.md
+    - Encryption: security/encryption.md
+    - Network Security: security/network-security.md
+    - Compliance: security/compliance.md
+    - Kubernetes Deployment: deployment/kubernetes.md
+    - Docker Deployment: deployment/docker.md
     - Self-Hosted: deployment/self-hosted.md
     - Enterprise: deployment/enterprise.md
     - Networking: deployment/networking.md
-    - Secrets: deployment/secrets.md
+    - Secrets Management: deployment/secrets.md
     - Upgrades: deployment/upgrades.md
   - Integrations:
     - GitHub: integrations/github.md
@@ -100,20 +119,6 @@ nav:
     - Neo4j: integrations/neo4j.md
     - Stripe: integrations/stripe.md
     - Custom MCP Servers: integrations/custom-mcp.md
-  - Security:
-    - Overview: security/overview.md
-    - RBAC: security/rbac.md
-    - Audit Logging: security/audit-logging.md
-    - Encryption: security/encryption.md
-    - Network Security: security/network-security.md
-    - Compliance: security/compliance.md
-  - API Reference:
-    - REST API: api-reference/rest-api.md
-    - WebSocket API: api-reference/websocket-api.md
-    - NATS API: api-reference/nats-api.md
-    - MCP Catalog: api-reference/mcp-catalog.md
-    - Event Types: api-reference/event-types.md
-    - Error Codes: api-reference/error-codes.md
   - Guides:
     - Migrate from Manual Ops: guides/migrate-from-manual.md
     - Enterprise Setup: guides/enterprise-setup.md
@@ -127,7 +132,12 @@ plugins:
 
 markdown_extensions:
   - admonition
-  - pymdownx.highlight
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
@@ -136,12 +146,20 @@ markdown_extensions:
   - pymdownx.tabbed:
       alternate_style: true
   - tables
+  - attr_list
+  - md_in_html
   - toc:
-      permalink: true
+      permalink: "#"
+      toc_depth: 3
+
+extra_css:
+  - stylesheets/terminalism.css
+
+extra_javascript:
+  - javascripts/terminal.js
 
 extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/GenBrainAI
-  analytics:
-    provider: google
+  generator: false

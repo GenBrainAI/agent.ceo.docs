@@ -1,0 +1,1538 @@
+/* =============================================================================
+   HIGH-FIDELITY TERMINALISM — Design System for MkDocs Material
+   agent.ceo Documentation | GenBrain AI
+   =============================================================================
+   Color Palette:
+     Surface-dim:        #0b141c     Surface-container:       #182028
+     Surface-high:       #222b33     Surface-highest:         #2d363e
+     Surface-lowest:     #060f16     On-surface:              #dae3ee
+     On-surface-variant: #b9ccb2     Primary (Terminal Green): #00ff41
+     Primary accent:     #00e639     Primary text:            #ebffe2
+     Secondary text:     #ddb7ff     Secondary container:     #6f00be
+     Tertiary:           #fff8f6     Error:                   #ffb4ab
+     Outline:            #84967e     Outline-variant:         #3b4b37
+   ========================================================================== */
+
+/* — Google Fonts ---------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+/* ==========================================================================
+   1. ROOT VARIABLES — Material Design Token Overrides
+   ========================================================================== */
+
+:root,
+[data-md-color-scheme="default"],
+[data-md-color-scheme="slate"] {
+  /* -- Surface palette ---------------------------------------------------- */
+  --md-default-bg-color:             #0b141c;
+  --md-default-fg-color:             #dae3ee;
+  --md-default-fg-color--light:      #b9ccb2;
+  --md-default-fg-color--lighter:    #84967e;
+  --md-default-fg-color--lightest:   #3b4b37;
+
+  /* -- Primary ------------------------------------------------------------ */
+  --md-primary-fg-color:             #00ff41;
+  --md-primary-fg-color--light:      #00e639;
+  --md-primary-fg-color--dark:       #00cc33;
+  --md-primary-bg-color:             #0b141c;
+  --md-primary-bg-color--light:      #182028;
+
+  /* -- Accent ------------------------------------------------------------- */
+  --md-accent-fg-color:              #00e639;
+  --md-accent-fg-color--transparent: rgba(0, 230, 57, 0.12);
+  --md-accent-bg-color:              #0b141c;
+
+  /* -- Typography --------------------------------------------------------- */
+  --md-text-font:                    "JetBrains Mono", monospace;
+  --md-code-font:                    "JetBrains Mono", monospace;
+  --md-text-color:                   #dae3ee;
+  --md-typeset-color:                #dae3ee;
+
+  /* -- Code block --------------------------------------------------------- */
+  --md-code-bg-color:                #0D1117;
+  --md-code-fg-color:                #dae3ee;
+  --md-code-hl-color:                rgba(0, 255, 65, 0.12);
+
+  /* -- Admonition --------------------------------------------------------- */
+  --md-admonition-bg-color:          #182028;
+  --md-admonition-fg-color:          #dae3ee;
+
+  /* -- Footer ------------------------------------------------------------- */
+  --md-footer-bg-color:              #060f16;
+  --md-footer-bg-color--dark:        #060f16;
+  --md-footer-fg-color:              #b9ccb2;
+  --md-footer-fg-color--light:       #84967e;
+  --md-footer-fg-color--lighter:     #3b4b37;
+
+  /* -- Shadow ------------------------------------------------------------- */
+  --md-shadow-z1: 0 0 12px rgba(0, 255, 65, 0.04);
+  --md-shadow-z2: 0 0 20px rgba(0, 255, 65, 0.08);
+  --md-shadow-z3: 0 0 30px rgba(0, 255, 65, 0.12);
+
+  /* -- Custom tokens ------------------------------------------------------ */
+  --term-surface-dim:                #0b141c;
+  --term-surface-container:          #182028;
+  --term-surface-container-high:     #222b33;
+  --term-surface-container-highest:  #2d363e;
+  --term-surface-container-lowest:   #060f16;
+  --term-on-surface:                 #dae3ee;
+  --term-on-surface-variant:         #b9ccb2;
+  --term-primary:                    #00ff41;
+  --term-primary-accent:             #00e639;
+  --term-primary-text:               #ebffe2;
+  --term-secondary-text:             #ddb7ff;
+  --term-secondary-container:        #6f00be;
+  --term-tertiary:                   #fff8f6;
+  --term-error:                      #ffb4ab;
+  --term-outline:                    #84967e;
+  --term-outline-variant:            #3b4b37;
+  --term-border-radius:              0px;
+  --term-glow-sm:                    0 0 10px rgba(0, 255, 65, 0.06);
+  --term-glow-md:                    0 0 20px rgba(0, 255, 65, 0.10);
+  --term-glow-lg:                    0 0 40px rgba(0, 255, 65, 0.15);
+}
+
+/* ==========================================================================
+   2. GLOBAL RESET & BASE STYLES
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  border-radius: var(--term-border-radius) !important;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "JetBrains Mono", monospace;
+  background-color: var(--term-surface-dim);
+  color: var(--term-on-surface);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================================================
+   3. SCANLINE OVERLAY — Persistent CRT effect
+   ========================================================================== */
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.06) 2px,
+    rgba(0, 0, 0, 0.06) 4px
+  );
+  background-size: 100% 4px;
+}
+
+/* ==========================================================================
+   4. TYPOGRAPHY
+   ========================================================================== */
+
+.md-typeset {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--term-on-surface);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* -- Headlines ------------------------------------------------------------ */
+
+.md-typeset h1 {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--term-primary-text);
+  letter-spacing: -0.02em;
+  border-bottom: none;
+  margin-top: 0;
+}
+
+.md-typeset h2 {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--term-primary-text);
+  border-bottom: 1px solid var(--term-outline-variant);
+  padding-bottom: 0.4em;
+  margin-top: 2em;
+}
+
+/* h2 preceded by ">" character */
+.md-typeset h2::before {
+  content: "> ";
+  color: var(--term-primary);
+  font-weight: 400;
+}
+
+.md-typeset h3 {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--term-primary-text);
+  margin-top: 1.6em;
+}
+
+.md-typeset h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--term-on-surface);
+  margin-top: 1.4em;
+}
+
+.md-typeset h5,
+.md-typeset h6 {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--term-on-surface-variant);
+  margin-top: 1.2em;
+}
+
+/* -- Body text ------------------------------------------------------------ */
+
+.md-typeset p {
+  color: var(--term-on-surface);
+  margin-bottom: 1em;
+}
+
+.md-typeset strong {
+  color: var(--term-primary-text);
+  font-weight: 700;
+}
+
+.md-typeset em {
+  color: var(--term-secondary-text);
+}
+
+/* -- Labels --------------------------------------------------------------- */
+
+.md-typeset .label,
+.md-typeset figcaption,
+.md-typeset .caption {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--term-on-surface-variant);
+}
+
+/* ==========================================================================
+   5. LINKS
+   ========================================================================== */
+
+.md-typeset a {
+  color: var(--term-primary);
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+  transition: all 0.15s ease;
+}
+
+.md-typeset a:hover,
+.md-typeset a:focus {
+  color: var(--term-surface-dim);
+  background-color: var(--term-primary);
+  text-decoration: none;
+  padding: 0 3px;
+  margin: 0 -3px;
+}
+
+.md-typeset a:active {
+  opacity: 0.85;
+}
+
+/* Exclude nav/header links from block-bg hover */
+.md-header a:hover,
+.md-nav a:hover,
+.md-footer a:hover,
+.md-tabs a:hover {
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+/* ==========================================================================
+   6. HEADER — Glassmorphism terminal header
+   ========================================================================== */
+
+.md-header {
+  background: rgba(11, 20, 28, 0.85) !important;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--term-outline-variant);
+  box-shadow: 0 1px 30px rgba(0, 255, 65, 0.06);
+}
+
+.md-header[data-md-state="shadow"] {
+  box-shadow: 0 1px 30px rgba(0, 255, 65, 0.10);
+}
+
+.md-header__title {
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 600;
+  color: var(--term-primary-text);
+}
+
+.md-header__button.md-logo {
+  filter: brightness(1.2);
+}
+
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  filter: brightness(0) invert(1);
+}
+
+.md-header__topic {
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 600;
+  color: var(--term-primary-text);
+}
+
+.md-header__topic + .md-header__topic {
+  color: var(--term-on-surface-variant);
+  font-weight: 400;
+}
+
+/* ==========================================================================
+   7. TABS (top navigation tabs)
+   ========================================================================== */
+
+.md-tabs {
+  background-color: var(--term-surface-container);
+  border-bottom: 1px solid var(--term-outline-variant);
+}
+
+.md-tabs__link {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--term-on-surface-variant);
+  opacity: 1;
+  transition: color 0.15s ease;
+}
+
+.md-tabs__link:hover {
+  color: var(--term-primary);
+}
+
+.md-tabs__link--active,
+.md-tabs__item--active .md-tabs__link {
+  color: var(--term-primary);
+}
+
+/* ==========================================================================
+   8. SIDEBAR NAVIGATION — Terminal sidebar
+   ========================================================================== */
+
+.md-sidebar {
+  background-color: var(--term-surface-container-lowest);
+}
+
+.md-sidebar--primary {
+  border-right: 1px solid var(--term-outline-variant);
+}
+
+.md-sidebar--secondary {
+  border-left: 1px solid var(--term-outline-variant);
+}
+
+/* Nav container */
+.md-nav {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+}
+
+/* Section headers — label-caps */
+.md-nav__title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--term-on-surface-variant);
+  padding: 0.8rem 0.6rem 0.4rem;
+}
+
+.md-nav__title .md-nav__icon {
+  color: var(--term-primary);
+}
+
+/* Nav items */
+.md-nav__item {
+  border-radius: 2px !important;
+}
+
+.md-nav__link {
+  color: var(--term-on-surface-variant);
+  font-weight: 400;
+  transition: all 0.12s ease;
+  border-radius: 2px !important;
+  padding: 0.4rem 0.6rem;
+  margin: 1px 0.4rem;
+}
+
+.md-nav__link:hover {
+  color: var(--term-primary);
+  background-color: rgba(0, 255, 65, 0.06);
+}
+
+/* Active nav item — primary-container background */
+.md-nav__link--active,
+.md-nav__item .md-nav__link--active {
+  color: var(--term-surface-dim) !important;
+  background-color: var(--term-primary) !important;
+  font-weight: 600;
+}
+
+/* Nested nav sections */
+.md-nav--secondary .md-nav__title {
+  font-size: 11px;
+  color: var(--term-on-surface-variant);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Sidebar scrollbar */
+.md-sidebar__scrollwrap::-webkit-scrollbar {
+  width: 4px;
+}
+
+.md-sidebar__scrollwrap::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.md-sidebar__scrollwrap::-webkit-scrollbar-thumb {
+  background: var(--term-outline-variant);
+}
+
+.md-sidebar__scrollwrap::-webkit-scrollbar-thumb:hover {
+  background: var(--term-outline);
+}
+
+/* ==========================================================================
+   9. TABLE OF CONTENTS (right sidebar)
+   ========================================================================== */
+
+.md-nav--secondary .md-nav__link {
+  color: var(--term-on-surface-variant);
+  font-size: 12px;
+  border-left: 2px solid transparent;
+  padding-left: 0.8rem;
+  margin: 0;
+  background-color: transparent !important;
+}
+
+.md-nav--secondary .md-nav__link:hover {
+  color: var(--term-primary);
+  background-color: transparent !important;
+}
+
+/* Active section indicator — left border in primary green */
+.md-nav--secondary .md-nav__link--active {
+  color: var(--term-primary) !important;
+  background-color: transparent !important;
+  border-left: 2px solid var(--term-primary);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   10. MAIN CONTENT AREA
+   ========================================================================== */
+
+.md-main {
+  background-color: var(--term-surface-dim);
+}
+
+.md-main__inner {
+  margin-top: 0;
+}
+
+.md-content {
+  max-width: 720px;
+}
+
+/* Terminal container wrapping for content */
+.md-content__inner {
+  padding: 2rem 1.5rem;
+  margin: 1.5rem 0;
+  position: relative;
+}
+
+/* Terminal container frame */
+.md-content__inner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 32px;
+  background: var(--term-surface-container);
+  border-bottom: 1px solid var(--term-outline-variant);
+}
+
+/* Terminal dots */
+.md-content__inner::after {
+  content: "";
+  position: absolute;
+  top: 11px;
+  left: 14px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50% !important;
+  background: #FF5F56;
+  box-shadow:
+    16px 0 0 #FFBD2E,
+    32px 0 0 #27C93F;
+}
+
+/* Offset content below the terminal bar */
+.md-content__inner > :first-child {
+  margin-top: 2.5rem;
+}
+
+/* Terminal outer border */
+.md-content__inner {
+  border: 1px solid var(--term-outline-variant);
+  background: var(--term-surface-dim);
+  transition: box-shadow 0.25s ease;
+}
+
+.md-content__inner:hover {
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
+}
+
+/* ==========================================================================
+   11. CODE BLOCKS — Terminal-style syntax
+   ========================================================================== */
+
+/* Inline code */
+.md-typeset code {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  background-color: var(--term-surface-container);
+  color: var(--term-primary);
+  border: 1px solid var(--term-outline-variant);
+  padding: 0.1em 0.4em;
+  word-break: break-word;
+}
+
+/* Fenced code blocks */
+.md-typeset pre {
+  background-color: #0D1117;
+  border: 1px solid var(--term-outline-variant);
+  position: relative;
+  line-height: 1.5;
+}
+
+.md-typeset pre > code {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  background-color: transparent;
+  border: none;
+  color: var(--term-on-surface);
+  padding: 1em 1.2em;
+}
+
+/* Syntax highlighting — terminal green for strings, purple for keywords */
+.highlight .s,
+.highlight .s1,
+.highlight .s2,
+.highlight .sc,
+.highlight .sd,
+.highlight .se,
+.highlight .sh,
+.highlight .si,
+.highlight .sx,
+.highlight .sr,
+.highlight .ss {
+  color: var(--term-primary) !important;
+}
+
+.highlight .k,
+.highlight .kc,
+.highlight .kd,
+.highlight .kn,
+.highlight .kp,
+.highlight .kr,
+.highlight .kt,
+.highlight .nb,
+.highlight .bp {
+  color: var(--term-secondary-text) !important;
+}
+
+.highlight .nf,
+.highlight .fm,
+.highlight .nc {
+  color: #79c0ff !important;
+}
+
+.highlight .c,
+.highlight .c1,
+.highlight .cm,
+.highlight .cp,
+.highlight .cs,
+.highlight .ch {
+  color: var(--term-outline) !important;
+  font-style: italic;
+}
+
+.highlight .mi,
+.highlight .mf,
+.highlight .mh,
+.highlight .mo,
+.highlight .mb,
+.highlight .il {
+  color: #f0883e !important;
+}
+
+.highlight .o,
+.highlight .ow {
+  color: var(--term-error) !important;
+}
+
+.highlight .na,
+.highlight .no {
+  color: #79c0ff !important;
+}
+
+.highlight .nn,
+.highlight .ni {
+  color: var(--term-on-surface) !important;
+}
+
+.highlight .p,
+.highlight .w {
+  color: var(--term-on-surface) !important;
+}
+
+.highlight .gd {
+  color: var(--term-error) !important;
+  background-color: rgba(255, 180, 171, 0.1);
+}
+
+.highlight .gi {
+  color: var(--term-primary) !important;
+  background-color: rgba(0, 255, 65, 0.08);
+}
+
+/* Code block copy button */
+.md-clipboard {
+  color: var(--term-on-surface-variant);
+}
+
+.md-clipboard:hover {
+  color: var(--term-primary);
+}
+
+/* Code block title/filename */
+.md-typeset .highlight > .filename,
+.md-typeset .highlighttable .filename {
+  background-color: var(--term-surface-container);
+  border-bottom: 1px solid var(--term-outline-variant);
+  color: var(--term-on-surface-variant);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Line numbers */
+.md-typeset .highlight .linenodiv pre {
+  color: var(--term-outline);
+}
+
+/* Line highlight */
+.md-typeset .highlight .hll {
+  background-color: rgba(0, 255, 65, 0.08);
+}
+
+/* ==========================================================================
+   12. LISTS — ">" prefix in primary green
+   ========================================================================== */
+
+.md-typeset ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.md-typeset ul > li {
+  position: relative;
+  padding-left: 1.6em;
+  margin-bottom: 0.5em;
+}
+
+.md-typeset ul > li::before {
+  content: ">";
+  position: absolute;
+  left: 0;
+  color: var(--term-primary);
+  font-weight: 700;
+  font-family: "JetBrains Mono", monospace;
+}
+
+/* Nested lists */
+.md-typeset ul ul > li::before {
+  content: "-";
+  color: var(--term-outline);
+}
+
+.md-typeset ul ul ul > li::before {
+  content: ".";
+  color: var(--term-outline-variant);
+}
+
+/* Ordered lists keep numbers but style them */
+.md-typeset ol {
+  padding-left: 1.6em;
+}
+
+.md-typeset ol > li {
+  margin-bottom: 0.5em;
+}
+
+.md-typeset ol > li::marker {
+  color: var(--term-primary);
+  font-weight: 700;
+}
+
+/* Task lists */
+.md-typeset .task-list-item {
+  padding-left: 0.4em;
+}
+
+.md-typeset .task-list-item::before {
+  content: none;
+}
+
+.md-typeset [type="checkbox"] {
+  accent-color: var(--term-primary);
+}
+
+/* Nav lists should not get ">" prefix */
+.md-nav ul > li::before {
+  content: none;
+}
+
+.md-nav ul {
+  list-style: none;
+}
+
+/* Footer lists */
+.md-footer ul > li::before {
+  content: none;
+}
+
+/* ==========================================================================
+   13. TABLES
+   ========================================================================== */
+
+.md-typeset table:not([class]) {
+  background-color: var(--term-surface-container);
+  border: 1px solid var(--term-outline-variant);
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--term-surface-container-high);
+  color: var(--term-primary-text);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 2px solid var(--term-outline-variant);
+  padding: 0.8em 1em;
+}
+
+.md-typeset table:not([class]) td {
+  border-bottom: 1px solid var(--term-outline-variant);
+  padding: 0.6em 1em;
+  color: var(--term-on-surface);
+}
+
+.md-typeset table:not([class]) tr:hover td {
+  background-color: rgba(0, 255, 65, 0.04);
+}
+
+.md-typeset table:not([class]) tr:last-child td {
+  border-bottom: none;
+}
+
+/* ==========================================================================
+   14. ADMONITIONS / CALLOUTS
+   ========================================================================== */
+
+.md-typeset .admonition,
+.md-typeset details {
+  background-color: var(--term-surface-container);
+  border: none;
+  border-left: 3px solid;
+  box-shadow: none;
+  font-size: 14px;
+}
+
+/* Info / Note — secondary purple */
+.md-typeset .admonition.note,
+.md-typeset .admonition.info,
+.md-typeset .admonition.abstract,
+.md-typeset .admonition.summary,
+.md-typeset .admonition.tldr,
+.md-typeset details.note,
+.md-typeset details.info {
+  border-left-color: var(--term-secondary-container);
+}
+
+.md-typeset .admonition.note .admonition-title,
+.md-typeset .admonition.info .admonition-title,
+.md-typeset .admonition.abstract .admonition-title,
+.md-typeset .admonition.summary .admonition-title,
+.md-typeset .admonition.tldr .admonition-title,
+.md-typeset details.note summary,
+.md-typeset details.info summary {
+  background-color: rgba(111, 0, 190, 0.12);
+  color: var(--term-secondary-text);
+}
+
+.md-typeset .admonition.note .admonition-title::before,
+.md-typeset .admonition.info .admonition-title::before,
+.md-typeset details.note summary::before,
+.md-typeset details.info summary::before {
+  color: var(--term-secondary-text);
+}
+
+/* Tip / Success — primary green */
+.md-typeset .admonition.tip,
+.md-typeset .admonition.hint,
+.md-typeset .admonition.important,
+.md-typeset .admonition.success,
+.md-typeset .admonition.check,
+.md-typeset .admonition.done,
+.md-typeset details.tip,
+.md-typeset details.success {
+  border-left-color: var(--term-primary);
+}
+
+.md-typeset .admonition.tip .admonition-title,
+.md-typeset .admonition.hint .admonition-title,
+.md-typeset .admonition.important .admonition-title,
+.md-typeset .admonition.success .admonition-title,
+.md-typeset .admonition.check .admonition-title,
+.md-typeset .admonition.done .admonition-title,
+.md-typeset details.tip summary,
+.md-typeset details.success summary {
+  background-color: rgba(0, 255, 65, 0.08);
+  color: var(--term-primary);
+}
+
+.md-typeset .admonition.tip .admonition-title::before,
+.md-typeset .admonition.success .admonition-title::before,
+.md-typeset details.tip summary::before,
+.md-typeset details.success summary::before {
+  color: var(--term-primary);
+}
+
+/* Warning / Danger / Error — error red */
+.md-typeset .admonition.warning,
+.md-typeset .admonition.caution,
+.md-typeset .admonition.attention,
+.md-typeset .admonition.danger,
+.md-typeset .admonition.failure,
+.md-typeset .admonition.fail,
+.md-typeset .admonition.missing,
+.md-typeset .admonition.bug,
+.md-typeset .admonition.error,
+.md-typeset details.warning,
+.md-typeset details.danger {
+  border-left-color: var(--term-error);
+}
+
+.md-typeset .admonition.warning .admonition-title,
+.md-typeset .admonition.caution .admonition-title,
+.md-typeset .admonition.attention .admonition-title,
+.md-typeset .admonition.danger .admonition-title,
+.md-typeset .admonition.failure .admonition-title,
+.md-typeset .admonition.fail .admonition-title,
+.md-typeset .admonition.missing .admonition-title,
+.md-typeset .admonition.bug .admonition-title,
+.md-typeset .admonition.error .admonition-title,
+.md-typeset details.warning summary,
+.md-typeset details.danger summary {
+  background-color: rgba(255, 180, 171, 0.10);
+  color: var(--term-error);
+}
+
+.md-typeset .admonition.warning .admonition-title::before,
+.md-typeset .admonition.danger .admonition-title::before,
+.md-typeset details.warning summary::before,
+.md-typeset details.danger summary::before {
+  color: var(--term-error);
+}
+
+/* Example / Quote — outline */
+.md-typeset .admonition.example,
+.md-typeset .admonition.quote,
+.md-typeset .admonition.cite,
+.md-typeset details.example,
+.md-typeset details.quote {
+  border-left-color: var(--term-outline);
+}
+
+.md-typeset .admonition.example .admonition-title,
+.md-typeset .admonition.quote .admonition-title,
+.md-typeset .admonition.cite .admonition-title,
+.md-typeset details.example summary,
+.md-typeset details.quote summary {
+  background-color: rgba(132, 150, 126, 0.10);
+  color: var(--term-outline);
+}
+
+/* Admonition title common */
+.md-typeset .admonition-title,
+.md-typeset details summary {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: "JetBrains Mono", monospace;
+  padding: 0.6em 1em;
+  margin: 0 -0.8em 0.6em;
+}
+
+/* Admonition body */
+.md-typeset .admonition > p,
+.md-typeset details > p {
+  color: var(--term-on-surface);
+}
+
+/* ==========================================================================
+   15. BUTTONS
+   ========================================================================== */
+
+.md-typeset .md-button {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: 1px solid var(--term-primary);
+  color: var(--term-primary);
+  background-color: transparent;
+  padding: 0.6em 1.6em;
+  transition: all 0.15s ease;
+  position: relative;
+}
+
+/* Primary button */
+.md-typeset .md-button--primary {
+  background-color: var(--term-primary);
+  color: var(--term-surface-dim);
+  border-color: var(--term-primary);
+}
+
+.md-typeset .md-button--primary:hover {
+  background-color: var(--term-primary-accent);
+  border-color: var(--term-primary-accent);
+  box-shadow: var(--term-glow-md);
+}
+
+/* Cursor blink animation on hover */
+.md-typeset .md-button:hover::after {
+  content: "_";
+  animation: cursorBlink 0.8s step-end infinite;
+  margin-left: 4px;
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.md-typeset .md-button:hover {
+  box-shadow: var(--term-glow-md);
+}
+
+/* ==========================================================================
+   16. SEARCH — Terminal-style with ">" prompt
+   ========================================================================== */
+
+.md-search__form {
+  background-color: var(--term-surface-container);
+  border: 1px solid var(--term-outline-variant);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.md-search__form:hover {
+  border-color: var(--term-outline);
+}
+
+.md-search__input {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 14px;
+  color: var(--term-on-surface);
+  background-color: transparent;
+}
+
+.md-search__input::placeholder {
+  color: var(--term-outline);
+  font-family: "JetBrains Mono", monospace;
+}
+
+/* ">" prompt before search */
+.md-search__icon[for="__search"] {
+  color: var(--term-primary);
+}
+
+/* Search results */
+.md-search__output {
+  background-color: var(--term-surface-container);
+  border: 1px solid var(--term-outline-variant);
+  border-top: none;
+}
+
+.md-search-result {
+  background-color: var(--term-surface-container);
+}
+
+.md-search-result__meta {
+  background-color: var(--term-surface-container-high);
+  color: var(--term-on-surface-variant);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.md-search-result__item {
+  border-bottom: 1px solid var(--term-outline-variant);
+}
+
+.md-search-result__link {
+  color: var(--term-on-surface);
+}
+
+.md-search-result__link:hover {
+  background-color: rgba(0, 255, 65, 0.06);
+}
+
+.md-search-result__article--document .md-search-result__title {
+  color: var(--term-primary-text);
+  font-weight: 600;
+}
+
+.md-search-result mark {
+  background-color: rgba(0, 255, 65, 0.2);
+  color: var(--term-primary);
+}
+
+/* ==========================================================================
+   17. FOOTER
+   ========================================================================== */
+
+.md-footer {
+  background-color: var(--term-surface-container-lowest);
+  border-top: 1px solid var(--term-outline-variant);
+}
+
+.md-footer-meta {
+  background-color: var(--term-surface-container-lowest);
+}
+
+.md-footer-nav {
+  background-color: var(--term-surface-container-lowest);
+}
+
+.md-footer__link {
+  color: var(--term-on-surface-variant);
+  transition: color 0.15s ease;
+}
+
+.md-footer__link:hover {
+  color: var(--term-primary);
+}
+
+.md-footer__title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--term-on-surface-variant);
+}
+
+.md-footer__direction {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--term-outline);
+}
+
+.md-footer__button {
+  color: var(--term-primary);
+}
+
+.md-footer-meta__inner {
+  color: var(--term-outline);
+  font-size: 12px;
+}
+
+.md-footer-meta a {
+  color: var(--term-on-surface-variant);
+}
+
+.md-footer-meta a:hover {
+  color: var(--term-primary);
+}
+
+.md-social__link {
+  color: var(--term-on-surface-variant);
+}
+
+.md-social__link:hover {
+  color: var(--term-primary);
+}
+
+/* ==========================================================================
+   18. GLASS PANELS
+   ========================================================================== */
+
+.md-typeset .grid,
+.md-typeset .card,
+.md-typeset blockquote {
+  background: rgba(26, 26, 26, 0.8);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(132, 150, 126, 0.2);
+  padding: 1.2em;
+}
+
+.md-typeset blockquote {
+  color: var(--term-on-surface-variant);
+  border-left: 3px solid var(--term-outline);
+}
+
+.md-typeset blockquote p {
+  color: var(--term-on-surface-variant);
+}
+
+/* ==========================================================================
+   19. TAGS / CHIPS
+   ========================================================================== */
+
+.md-typeset .md-tag {
+  background-color: #8B949E;
+  color: #0D0D0D;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.2em 0.6em;
+  border: none;
+}
+
+.md-typeset .md-tag:hover {
+  background-color: var(--term-primary);
+  color: var(--term-surface-dim);
+}
+
+/* ==========================================================================
+   20. CONTENT TABS (pymdownx.tabbed)
+   ========================================================================== */
+
+.md-typeset .tabbed-set {
+  border: 1px solid var(--term-outline-variant);
+  background-color: var(--term-surface-container);
+}
+
+.md-typeset .tabbed-labels {
+  background-color: var(--term-surface-container-high);
+  border-bottom: 1px solid var(--term-outline-variant);
+}
+
+.md-typeset .tabbed-labels > label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--term-on-surface-variant);
+  padding: 0.6em 1.2em;
+  border-bottom: 2px solid transparent;
+  opacity: 1;
+}
+
+.md-typeset .tabbed-labels > label:hover {
+  color: var(--term-primary);
+}
+
+.md-typeset .tabbed-labels > label--active,
+.md-typeset .tabbed-labels > .tabbed-labels--active,
+.md-typeset .tabbed-set > input:checked + label {
+  color: var(--term-primary);
+  border-bottom-color: var(--term-primary);
+}
+
+/* Active tab indicator (Material uses an ::after for the sliding indicator) */
+.md-typeset .tabbed-labels > label::after {
+  background-color: var(--term-primary);
+}
+
+.md-typeset .tabbed-content {
+  padding: 1em;
+}
+
+/* ==========================================================================
+   21. MERMAID DIAGRAMS
+   ========================================================================== */
+
+.md-typeset .mermaid {
+  background-color: var(--term-surface-container);
+  border: 1px solid var(--term-outline-variant);
+  padding: 1.5em;
+}
+
+/* ==========================================================================
+   22. HORIZONTAL RULES
+   ========================================================================== */
+
+.md-typeset hr {
+  border: none;
+  border-top: 1px solid var(--term-outline-variant);
+  margin: 2em 0;
+}
+
+/* ==========================================================================
+   23. IMAGES & FIGURES
+   ========================================================================== */
+
+.md-typeset img {
+  border: 1px solid var(--term-outline-variant);
+}
+
+.md-typeset figure {
+  margin: 1.5em 0;
+}
+
+.md-typeset figcaption {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--term-on-surface-variant);
+  margin-top: 0.6em;
+  text-align: center;
+}
+
+/* ==========================================================================
+   24. TOOLTIPS
+   ========================================================================== */
+
+.md-tooltip {
+  background-color: var(--term-surface-container-highest);
+  color: var(--term-on-surface);
+  border: 1px solid var(--term-outline-variant);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  box-shadow: var(--term-glow-sm);
+}
+
+/* ==========================================================================
+   25. KEYBOARD KEYS
+   ========================================================================== */
+
+.md-typeset kbd {
+  background-color: var(--term-surface-container-high);
+  border: 1px solid var(--term-outline-variant);
+  border-bottom: 2px solid var(--term-outline-variant);
+  color: var(--term-on-surface);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   26. DEFINITION LISTS
+   ========================================================================== */
+
+.md-typeset dt {
+  color: var(--term-primary-text);
+  font-weight: 600;
+}
+
+.md-typeset dd {
+  color: var(--term-on-surface);
+  margin-left: 1.6em;
+}
+
+/* ==========================================================================
+   27. PERMALINK ANCHORS
+   ========================================================================== */
+
+.md-typeset .headerlink {
+  color: var(--term-outline);
+  transition: color 0.15s ease;
+}
+
+.md-typeset .headerlink:hover {
+  color: var(--term-primary);
+  background: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* ==========================================================================
+   28. ANNOUNCEMENT BAR
+   ========================================================================== */
+
+.md-banner {
+  background-color: var(--term-secondary-container);
+  color: var(--term-secondary-text);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.md-banner a {
+  color: var(--term-primary-text);
+}
+
+/* ==========================================================================
+   29. DIALOG / MODAL
+   ========================================================================== */
+
+.md-dialog {
+  background-color: var(--term-surface-container-high);
+  border: 1px solid var(--term-outline-variant);
+  color: var(--term-on-surface);
+  box-shadow: var(--term-glow-lg);
+}
+
+/* ==========================================================================
+   30. SOURCE / REPOSITORY LINK
+   ========================================================================== */
+
+.md-source {
+  color: var(--term-on-surface-variant);
+}
+
+.md-source:hover {
+  opacity: 1;
+}
+
+.md-source__icon {
+  color: var(--term-primary);
+}
+
+.md-source__repository {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   31. STATUS / BADGES
+   ========================================================================== */
+
+.md-typeset .md-status {
+  font-family: "JetBrains Mono", monospace;
+}
+
+.md-typeset .md-status--new {
+  color: var(--term-primary);
+}
+
+.md-typeset .md-status--deprecated {
+  color: var(--term-error);
+}
+
+/* ==========================================================================
+   32. BACK TO TOP BUTTON
+   ========================================================================== */
+
+.md-top {
+  background-color: var(--term-surface-container-high);
+  border: 1px solid var(--term-outline-variant);
+  color: var(--term-primary);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  box-shadow: var(--term-glow-sm);
+}
+
+.md-top:hover {
+  background-color: var(--term-primary);
+  color: var(--term-surface-dim);
+  box-shadow: var(--term-glow-md);
+}
+
+/* ==========================================================================
+   33. PROGRESS BAR (instant-loading)
+   ========================================================================== */
+
+.md-progress {
+  background-color: var(--term-primary);
+}
+
+/* ==========================================================================
+   34. SELECTION
+   ========================================================================== */
+
+::selection {
+  background-color: rgba(0, 255, 65, 0.25);
+  color: var(--term-primary-text);
+}
+
+::-moz-selection {
+  background-color: rgba(0, 255, 65, 0.25);
+  color: var(--term-primary-text);
+}
+
+/* ==========================================================================
+   35. SCROLLBAR — Global
+   ========================================================================== */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--term-surface-dim);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--term-outline-variant);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--term-outline);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--term-outline-variant) var(--term-surface-dim);
+}
+
+/* ==========================================================================
+   36. PRINT OVERRIDES
+   ========================================================================== */
+
+@media print {
+  body::after {
+    display: none;
+  }
+
+  .md-content__inner::before,
+  .md-content__inner::after {
+    display: none;
+  }
+
+  .md-typeset a {
+    color: #000;
+    text-decoration: underline;
+  }
+}
+
+/* ==========================================================================
+   37. MOBILE RESPONSIVE ADJUSTMENTS
+   ========================================================================== */
+
+@media screen and (max-width: 76.25em) {
+  .md-sidebar--primary {
+    background-color: var(--term-surface-container-lowest);
+  }
+
+  .md-nav--primary .md-nav__title {
+    background-color: var(--term-surface-container);
+    color: var(--term-primary-text);
+    border-bottom: 1px solid var(--term-outline-variant);
+  }
+
+  .md-nav--primary .md-nav__title .md-nav__icon::after {
+    color: var(--term-primary);
+  }
+}
+
+@media screen and (max-width: 60em) {
+  .md-typeset h1 {
+    font-size: 32px;
+  }
+
+  .md-typeset h2 {
+    font-size: 24px;
+  }
+
+  .md-typeset h3 {
+    font-size: 20px;
+  }
+
+  .md-content__inner {
+    padding: 1.5rem 1rem;
+    margin: 0.5rem 0;
+  }
+}
+
+/* ==========================================================================
+   38. CURSOR BLINK ANIMATION (reusable)
+   ========================================================================== */
+
+@keyframes terminalCursorBlink {
+  0%, 49.9% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* Blinking cursor after h1 */
+.md-typeset h1::after {
+  content: "_";
+  color: var(--term-primary);
+  font-weight: 400;
+  animation: terminalCursorBlink 1s step-end infinite;
+  margin-left: 2px;
+}
+
+/* ==========================================================================
+   39. FOCUS STYLES — Accessibility
+   ========================================================================== */
+
+:focus-visible {
+  outline: 2px solid var(--term-primary);
+  outline-offset: 2px;
+}
+
+.md-nav__link:focus-visible {
+  outline: 2px solid var(--term-primary);
+  outline-offset: -2px;
+}
+
+/* ==========================================================================
+   40. TRANSITION UTILITIES
+   ========================================================================== */
+
+.md-header,
+.md-tabs,
+.md-sidebar,
+.md-content__inner,
+.md-footer {
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.25s ease;
+}

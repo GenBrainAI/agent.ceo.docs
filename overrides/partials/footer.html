@@ -1,0 +1,93 @@
+<footer class="terminal-footer">
+  <div class="terminal-footer__inner">
+    <div class="terminal-footer__copyright">
+      <span class="terminal-footer__symbol">&gt;_</span>
+      &copy; 2026 AGENT_CEO // PROTOCOL_V3
+    </div>
+    <nav class="terminal-footer__nav" aria-label="Footer navigation">
+      <a href="https://github.com/GenBrainAI" class="terminal-footer__link" target="_blank" rel="noopener">
+        GITHUB
+      </a>
+      <span class="terminal-footer__sep">//</span>
+      <a href="{{ 'getting-started/' | url }}" class="terminal-footer__link">
+        DOCUMENTATION
+      </a>
+      <span class="terminal-footer__sep">//</span>
+      <a href="{{ 'security/overview/' | url }}" class="terminal-footer__link">
+        SECURITY_OFFICE
+      </a>
+      <span class="terminal-footer__sep">//</span>
+      <a href="https://status.agent.ceo" class="terminal-footer__link" target="_blank" rel="noopener">
+        STATUS
+      </a>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .terminal-footer {
+    background: #060f16;
+    border-top: 1px solid #00ff4120;
+    padding: 1.5rem 1.25rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .terminal-footer__inner {
+    max-width: 75rem;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .terminal-footer__copyright {
+    color: #4a9a5c;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .terminal-footer__symbol {
+    color: #00ff41;
+    font-weight: 700;
+    margin-right: 0.35rem;
+  }
+
+  .terminal-footer__nav {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .terminal-footer__link {
+    color: #00ff41;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: text-shadow 0.2s ease, color 0.2s ease;
+  }
+
+  .terminal-footer__link:hover {
+    color: #33ff66;
+    text-shadow: 0 0 6px rgba(0, 255, 65, 0.5);
+  }
+
+  .terminal-footer__sep {
+    color: #1a3a24;
+    font-size: 0.6rem;
+    user-select: none;
+  }
+
+  @media (max-width: 600px) {
+    .terminal-footer__inner {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>
