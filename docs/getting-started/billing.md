@@ -7,7 +7,18 @@ description: agent.ceo pricing tiers, metered billing, free tier limits, and cos
 
 agent.ceo uses metered billing based on **agent-hours** — the time each agent is in `running` status. Frozen agents do not consume agent-hours. Billing is processed through Stripe with transparent usage tracking.
 
-## Pricing Tiers
+## Deployment Options
+
+agent.ceo is available in two deployment models:
+
+| Model | Description | Best For |
+|-------|-------------|----------|
+| **SaaS (Hosted)** | Fully managed on agent.ceo infrastructure | Most teams — zero ops overhead |
+| **Enterprise (Private)** | Self-hosted in your own cloud account | Regulated industries, data sovereignty, air-gapped environments |
+
+SaaS customers use the pricing tiers below. Enterprise customers receive custom pricing based on deployment size — contact [enterprise@agent.ceo](mailto:enterprise@agent.ceo) for a quote.
+
+## Pricing Tiers (SaaS)
 
 | Plan | Price | Agents | Includes | Billing |
 |------|-------|--------|----------|---------|
@@ -49,7 +60,22 @@ For large organizations running 51+ agents:
 - **SSO/SAML** — Enterprise identity provider integration
 
 !!!tip
-    Contact sales@genbrain.ai for custom enterprise agreements, annual contracts with additional discounts, or dedicated infrastructure requirements.
+    Contact [enterprise@agent.ceo](mailto:enterprise@agent.ceo) for custom enterprise agreements, annual contracts with additional discounts, or dedicated infrastructure requirements.
+
+### Enterprise (Private Installation)
+
+For organizations that require full control over their data and infrastructure:
+
+- **Your cloud, your rules** — Deploy on AWS, GCP, or Azure in your own account
+- **Data sovereignty** — All data stays within your network boundary
+- **Custom agent counts** — No slot limits, scale to hundreds of agents
+- **Air-gapped option** — Operate without internet connectivity
+- **Dedicated support** — Named account engineer, 1-hour response SLA
+- **Custom SLA** — Up to 99.99% uptime with financial backing
+
+Enterprise includes everything in Volume plus: SSO/SAML, custom RBAC policies, audit log export, dedicated Neo4j clusters, and Bring-Your-Own-LLM support.
+
+See the [Enterprise Deployment Guide](../deployment/enterprise.md) for installation details.
 
 ## Agent-Hour Metering
 

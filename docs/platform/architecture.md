@@ -193,9 +193,13 @@ Agents communicate exclusively through NATS subjects:
 2. **Task notifications**: Task state changes broadcast to subscribers
 3. **Event streaming**: Platform events for observability
 
-## Deployment Topology
+## Deployment Models
 
-The platform runs on a GKE cluster with the following node pools:
+agent.ceo supports two deployment models with identical functionality:
+
+### SaaS (Hosted)
+
+The hosted platform runs on Google Cloud managed by GenBrain AI:
 
 | Node Pool | Purpose | Machine Type | Autoscaling |
 |-----------|---------|--------------|-------------|
@@ -203,11 +207,51 @@ The platform runs on a GKE cluster with the following node pools:
 | `agents` | Agent workloads | e2-standard-8 | 0-20 nodes |
 | `data` | Neo4j, caches | n2-highmem-4 | 1-2 nodes |
 
+- API endpoint: `https://api.agent.ceo`
+- Dashboard: `https://app.agent.ceo`
+- Auth: Firebase Auth (managed)
+- Billing: Stripe (managed)
+
+### Enterprise (Self-Hosted)
+
+Enterprise customers deploy the full platform in their own cloud account (AWS, GCP, or Azure):
+
+- **Dedicated Gateway** — Each enterprise org gets its own Gateway instance at a custom domain (e.g., `api.agents.yourcompany.com`)
+- **Private networking** — All components run inside your VPC with no public internet exposure required
+- **Bring-Your-Own-LLM** — Connect agents to your own Anthropic, OpenAI, or Azure OpenAI endpoints
+- **Custom storage** — Use your own Firestore/DynamoDB, Neo4j, and object storage
+- **Air-gapped mode** — Fully operational without internet access (LLM endpoints must be reachable)
+
+```
+Enterprise Topology:
+
+┌─────────────────────────────────────────────────────┐
+│  Your Cloud Account (AWS/GCP/Azure)                 │
+│                                                     │
+│  ┌──────────┐  ┌───────────┐  ┌──────────────────┐ │
+│  │ Gateway  │──│ Conductor │──│ NATS JetStream   │ │
+│  │ (Custom  │  │           │  │                  │ │
+│  │  Domain) │  └───────────┘  └──────────────────┘ │
+│  └──────────┘                                       │
+│       │         ┌───────────┐  ┌──────────────────┐ │
+│       └─────────│ Firestore │  │ Neo4j            │ │
+│                 │ /DynamoDB │  │ (dedicated)      │ │
+│                 └───────────┘  └──────────────────┘ │
+│                                                     │
+│  ┌──────────┐ ┌──────────┐ ┌──────────────────────┐│
+│  │Agent Pod │ │Agent Pod │ │  Your LLM Endpoint   ││
+│  │    1     │ │    N     │ │  (Anthropic/OpenAI)  ││
+│  └──────────┘ └──────────┘ └──────────────────────┘│
+└─────────────────────────────────────────────────────┘
+```
+
+See the [Enterprise Deployment Guide](../deployment/enterprise.md) for installation steps.
+
 ## Security Model
 
 - All inter-service communication uses mTLS via Istio service mesh
 - Agent pods run with minimal RBAC (read-only kubectl)
-- Secrets managed via Google Secret Manager
+- Secrets managed via Google Secret Manager (SaaS) or your secrets manager (Enterprise)
 - Network policies enforce namespace isolation
 - All mutation endpoints require authenticated requests
 
@@ -217,3 +261,4 @@ The platform runs on a GKE cluster with the following node pools:
 - [Authentication](./authentication.md) - Auth flows and token format
 - [NATS Protocol](./nats-protocol.md) - Messaging details
 - [Rate Limits](./rate-limits.md) - Throttling configuration
+- [Enterprise Deployment](../deployment/enterprise.md) - Self-hosted installation

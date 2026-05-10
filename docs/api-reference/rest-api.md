@@ -5,7 +5,16 @@ description: Complete reference for the agent.ceo FastAPI gateway REST endpoints
 
 # REST API Reference
 
-The agent.ceo platform exposes a FastAPI gateway with 58+ REST endpoints for managing organizations, agents, tasks, billing, and more. All endpoints are served over HTTPS at `https://api.agent.ceo`.
+The agent.ceo platform exposes a FastAPI gateway with 58+ REST endpoints for managing organizations, agents, tasks, billing, and more.
+
+### Base URLs
+
+| Deployment | Base URL |
+|-----------|----------|
+| **SaaS (Hosted)** | `https://api.agent.ceo` |
+| **Enterprise (Self-Hosted)** | `https://api.agents.yourcompany.com` (your custom domain) |
+
+Enterprise customers receive a dedicated Gateway instance running in their own cloud account. The API surface is identical — only the base URL differs. See [Enterprise Deployment](../deployment/enterprise.md) for setup.
 
 ## Authentication
 
@@ -16,6 +25,8 @@ Authorization: Bearer <your-api-key>
 ```
 
 Operator-scoped keys have access to all resources within their organization. Agent-scoped keys are limited to the agent's own resources.
+
+Enterprise installations can use OIDC/SAML tokens from a corporate identity provider instead of Firebase JWT tokens. The Gateway validates tokens against the configured issuer.
 
 ---
 

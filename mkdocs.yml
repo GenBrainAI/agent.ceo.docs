@@ -61,6 +61,7 @@ nav:
     - Kubernetes: deployment/kubernetes.md
     - Docker: deployment/docker.md
     - Self-Hosted: deployment/self-hosted.md
+    - Enterprise: deployment/enterprise.md
     - Networking: deployment/networking.md
     - Secrets: deployment/secrets.md
     - Upgrades: deployment/upgrades.md
