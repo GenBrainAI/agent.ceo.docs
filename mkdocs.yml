@@ -1,0 +1,119 @@
+site_name: agent.ceo Documentation
+site_url: https://docs.agent.ceo
+site_description: Complete platform documentation for agent.ceo — the cyborgenic AI agent orchestration platform by GenBrain AI.
+repo_url: https://github.com/GenBrainAI/agent.ceo.docs
+
+theme:
+  name: material
+  palette:
+    primary: deep purple
+    accent: amber
+  features:
+    - navigation.sections
+    - navigation.expand
+    - search.highlight
+    - content.code.copy
+
+nav:
+  - Getting Started:
+    - Overview: getting-started/index.md
+    - Deploy Your First Agent: getting-started/first-agent.md
+    - Set Up an Agent Team: getting-started/agent-team.md
+    - Dashboard Guide: getting-started/dashboard.md
+    - Billing & Pricing: getting-started/billing.md
+  - Concepts:
+    - AI Agents: concepts/agents.md
+    - Organizations: concepts/organizations.md
+    - Roles: concepts/roles.md
+    - Messaging: concepts/messaging.md
+    - Task Management: concepts/tasks.md
+    - Agent Lifecycle: concepts/lifecycle.md
+    - Knowledge Base: concepts/knowledge-base.md
+    - Cyborgenic Organizations: concepts/cyborgenic-orgs.md
+  - Platform:
+    - Architecture: platform/architecture.md
+    - Gateway API: platform/gateway-api.md
+    - Authentication: platform/authentication.md
+    - Billing API: platform/billing-api.md
+    - Webhooks: platform/webhooks.md
+    - MCP Tools: platform/mcp-tools.md
+    - NATS Protocol: platform/nats-protocol.md
+    - Rate Limits: platform/rate-limits.md
+  - Agents:
+    - Creating Agents: agents/creating-agents.md
+    - Agent Configuration: agents/agent-config.md
+    - Templates: agents/templates.md
+    - Tools: agents/tools.md
+    - Memory: agents/memory.md
+    - Hooks: agents/hooks.md
+    - Scaling: agents/scaling.md
+    - Monitoring: agents/monitoring.md
+  - Features:
+    - Knowledge Base: features/knowledge-base.md
+    - Cloud Discovery: features/cloud-discovery.md
+    - CI/CD Analysis: features/cicd-analysis.md
+    - Security Reviews: features/security-reviews.md
+    - Task Management: features/task-management.md
+    - Meetings: features/meetings.md
+    - Skill Generation: features/skill-generation.md
+    - Two-Factor Auth: features/2fa-mfa.md
+  - Deployment:
+    - Kubernetes: deployment/kubernetes.md
+    - Docker: deployment/docker.md
+    - Self-Hosted: deployment/self-hosted.md
+    - Networking: deployment/networking.md
+    - Secrets: deployment/secrets.md
+    - Upgrades: deployment/upgrades.md
+  - Integrations:
+    - GitHub: integrations/github.md
+    - Slack: integrations/slack.md
+    - Gmail: integrations/gmail.md
+    - Google Calendar: integrations/google-calendar.md
+    - Neo4j: integrations/neo4j.md
+    - Stripe: integrations/stripe.md
+    - Custom MCP Servers: integrations/custom-mcp.md
+  - Security:
+    - Overview: security/overview.md
+    - RBAC: security/rbac.md
+    - Audit Logging: security/audit-logging.md
+    - Encryption: security/encryption.md
+    - Network Security: security/network-security.md
+    - Compliance: security/compliance.md
+  - API Reference:
+    - REST API: api-reference/rest-api.md
+    - WebSocket API: api-reference/websocket-api.md
+    - NATS API: api-reference/nats-api.md
+    - MCP Catalog: api-reference/mcp-catalog.md
+    - Event Types: api-reference/event-types.md
+    - Error Codes: api-reference/error-codes.md
+  - Guides:
+    - Migrate from Manual Ops: guides/migrate-from-manual.md
+    - Enterprise Setup: guides/enterprise-setup.md
+    - Cost Optimization: guides/cost-optimization.md
+    - Troubleshooting: guides/troubleshooting.md
+    - Best Practices: guides/best-practices.md
+    - FAQ: guides/faq.md
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - toc:
+      permalink: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/GenBrainAI
+  analytics:
+    provider: google
