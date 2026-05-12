@@ -7,6 +7,10 @@ description: Step-by-step guide to deploying agent.ceo on your own Kubernetes cl
 
 Deploy agent.ceo on your own infrastructure. This guide covers deploying on any Kubernetes cluster (EKS, AKS, on-prem, k3s) with all required services.
 
+If you are still deciding whether to self-host, read [Choose SaaS or Private Kubernetes](../getting-started/choose-deployment.md) first. If you already know that agents must run inside your own network, continue here.
+
+Before deploying agents, model the organization in [agent.ceo/map](../ui/organization-map.md). The map defines users, teams, agent ownership, system scope, and escalation paths. Self-hosting controls where the platform runs; the map controls how work is routed.
+
 ## Prerequisites
 
 | Component | Requirement | Notes |

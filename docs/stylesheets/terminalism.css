@@ -90,6 +90,8 @@
   --term-glow-sm:                    0 0 10px rgba(0, 255, 65, 0.06);
   --term-glow-md:                    0 0 20px rgba(0, 255, 65, 0.10);
   --term-glow-lg:                    0 0 40px rgba(0, 255, 65, 0.15);
+  --term-content-max:                860px;
+  --term-shell-max:                  1280px;
 }
 
 /* ==========================================================================
@@ -112,6 +114,18 @@ body {
   color: var(--term-on-surface);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(0, 255, 65, 0.055), transparent 26rem),
+    radial-gradient(circle at 82% 8%, rgba(111, 0, 190, 0.08), transparent 28rem),
+    linear-gradient(180deg, #0b141c 0%, #060f16 100%);
 }
 
 /* ==========================================================================
@@ -154,9 +168,13 @@ body::after {
   font-weight: 700;
   line-height: 1.15;
   color: var(--term-primary-text);
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   border-bottom: none;
   margin-top: 0;
+}
+
+.md-typeset h1 + p {
+  max-width: 68ch;
 }
 
 .md-typeset h2 {
@@ -276,6 +294,12 @@ body::after {
   box-shadow: 0 1px 30px rgba(0, 255, 65, 0.06);
 }
 
+.terminal-header-brand {
+  position: sticky;
+  top: var(--md-header-height);
+  z-index: 3;
+}
+
 .md-header[data-md-state="shadow"] {
   box-shadow: 0 1px 30px rgba(0, 255, 65, 0.10);
 }
@@ -365,6 +389,15 @@ body::after {
   letter-spacing: 0.1em;
   color: var(--term-on-surface-variant);
   padding: 0.8rem 0.6rem 0.4rem;
+}
+
+.md-sidebar--primary .md-nav__title::before {
+  content: "CURRENT_CONTEXT";
+  display: block;
+  margin-bottom: 0.45rem;
+  color: var(--term-outline);
+  font-size: 10px;
+  letter-spacing: 0.1em;
 }
 
 .md-nav__title .md-nav__icon {
@@ -462,19 +495,19 @@ body::after {
 }
 
 .md-content {
-  max-width: 720px;
+  max-width: var(--term-content-max);
 }
 
 /* Terminal container wrapping for content */
 .md-content__inner {
-  padding: 2rem 1.5rem;
+  padding: 2.25rem 2rem;
   margin: 1.5rem 0;
   position: relative;
 }
 
 /* Terminal container frame */
 .md-content__inner::before {
-  content: "";
+  content: "DOCUMENTATION_HUB.md";
   position: absolute;
   top: 0;
   left: 0;
@@ -482,6 +515,14 @@ body::after {
   height: 32px;
   background: var(--term-surface-container);
   border-bottom: 1px solid var(--term-outline-variant);
+  color: var(--term-outline);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 /* Terminal dots */
@@ -507,12 +548,60 @@ body::after {
 /* Terminal outer border */
 .md-content__inner {
   border: 1px solid var(--term-outline-variant);
-  background: var(--term-surface-dim);
+  background: rgba(11, 20, 28, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   transition: box-shadow 0.25s ease;
 }
 
 .md-content__inner:hover {
   box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
+}
+
+.md-typeset > h1:first-child::before {
+  content: "[DOCS] SYSTEM: ";
+  display: block;
+  margin-bottom: 0.75rem;
+  color: var(--term-primary);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.md-typeset > h1:first-child {
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--term-outline-variant);
+}
+
+.md-typeset > h1:first-child + p {
+  margin-top: 1.25rem;
+}
+
+.md-typeset > p:first-of-type {
+  color: var(--term-primary-text);
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+.md-typeset table:not([class]) {
+  font-size: 14px;
+  display: table;
+  width: 100%;
+}
+
+.md-typeset table:not([class]) th {
+  color: var(--term-primary-text);
+  background: var(--term-surface-container-high);
+}
+
+.md-typeset table:not([class]) td {
+  vertical-align: top;
+}
+
+.md-typeset .admonition,
+.md-typeset details {
+  background: rgba(24, 32, 40, 0.78);
+  border-color: var(--term-outline-variant);
 }
 
 /* ==========================================================================
@@ -538,6 +627,7 @@ body::after {
   border: 1px solid var(--term-outline-variant);
   position: relative;
   line-height: 1.5;
+  box-shadow: inset 0 1px 0 rgba(218, 227, 238, 0.04);
 }
 
 .md-typeset pre > code {
@@ -1115,7 +1205,7 @@ body::after {
 .md-typeset .grid,
 .md-typeset .card,
 .md-typeset blockquote {
-  background: rgba(26, 26, 26, 0.8);
+  background: rgba(24, 32, 40, 0.78);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(132, 150, 126, 0.2);
@@ -1490,6 +1580,12 @@ body::after {
   .md-content__inner {
     padding: 1.5rem 1rem;
     margin: 0.5rem 0;
+  }
+
+  .md-content__inner::before {
+    justify-content: flex-end;
+    padding-right: 0.8rem;
+    font-size: 9px;
   }
 }
 

@@ -23,15 +23,24 @@ theme:
     repo: fontawesome/brands/github
 
 nav:
-  - What is agent.ceo:
+  - Start Here:
     - Introduction: getting-started/index.md
+    - Choose SaaS or Private Kubernetes: getting-started/choose-deployment.md
+    - SaaS Quick Start: getting-started/saas.md
+    - Deploy Your First Agent: getting-started/first-agent.md
+    - Set Up an Agent Team: getting-started/agent-team.md
+    - Organization Map: ui/organization-map.md
+    - Install on Your Own Kubernetes: deployment/install-on-kubernetes.md
+  - What is agent.ceo:
     - Cyborgenic Organizations: concepts/cyborgenic-orgs.md
     - Cyborgenic Vision (Deep Dive): concepts/cyborgenic-organizations.md
     - Human-AI Collaboration: concepts/human-ai-collaboration.md
     - Continuous Operation: concepts/continuous-operation.md
     - Architecture: platform/architecture.md
   - Quick Start:
-    - Deploy Your First Agent: getting-started/first-agent.md
+    - Choose a Deployment Path: getting-started/choose-deployment.md
+    - SaaS Onboarding: getting-started/saas.md
+    - First Agent: getting-started/first-agent.md
     - Set Up an Agent Team: getting-started/agent-team.md
     - Dashboard Guide: getting-started/dashboard.md
     - Billing & Pricing: getting-started/billing.md
@@ -68,6 +77,7 @@ nav:
     - Two-Factor Auth: features/2fa-mfa.md
   - UI Guide:
     - Dashboard Overview: ui/dashboard-overview.md
+    - Organization Map: ui/organization-map.md
     - Terminal: ui/terminal.md
     - Task Board: ui/task-board.md
     - Agent Management: ui/agent-management.md
@@ -98,13 +108,14 @@ nav:
     - Integration Guide: mcp/mcp-integration-guide.md
     - Security: mcp/mcp-security.md
   - Operations:
+    - Install on Your Own Kubernetes: deployment/install-on-kubernetes.md
     - Security Overview: security/overview.md
     - RBAC: security/rbac.md
     - Audit Logging: security/audit-logging.md
     - Encryption: security/encryption.md
     - Network Security: security/network-security.md
     - Compliance: security/compliance.md
-    - Kubernetes Deployment: deployment/kubernetes.md
+    - Kubernetes Reference: deployment/kubernetes.md
     - Docker Deployment: deployment/docker.md
     - Self-Hosted: deployment/self-hosted.md
     - Enterprise: deployment/enterprise.md
