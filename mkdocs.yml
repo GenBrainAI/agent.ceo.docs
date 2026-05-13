@@ -70,6 +70,9 @@ nav:
     - Task Management: features/task-management.md
     - Meetings: features/meetings.md
     - Knowledge Base: features/knowledge-base.md
+    - Knowledge Base Sharing: features/knowledge-base-sharing.md
+    - Members & Invitations: features/members.md
+    - Provider API Keys (BYOK): features/api-keys.md
     - Cloud Discovery: features/cloud-discovery.md
     - CI/CD Analysis: features/cicd-analysis.md
     - Security Reviews: features/security-reviews.md
