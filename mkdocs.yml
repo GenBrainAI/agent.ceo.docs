@@ -78,6 +78,7 @@ nav:
     - Security Reviews: features/security-reviews.md
     - Skill Generation: features/skill-generation.md
     - Two-Factor Auth: features/2fa-mfa.md
+    - Self-Hosted Nodes (super-agent-ceo): features/super-agent-ceo.md
   - UI Guide:
     - Dashboard Overview: ui/dashboard-overview.md
     - Organization Map: ui/organization-map.md
