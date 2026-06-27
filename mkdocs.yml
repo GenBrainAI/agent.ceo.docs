@@ -53,6 +53,7 @@ nav:
     - Task Management: concepts/tasks.md
     - Messaging (NATS): concepts/messaging.md
     - Knowledge Graph: concepts/knowledge-base.md
+    - Observable Loop: concepts/observable-loop.md
     - GenAI-First Architecture: genai/genai-first-architecture.md
     - LLM Agent Patterns: genai/llm-agent-patterns.md
     - Context Management: genai/context-management.md
